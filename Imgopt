@@ -1,0 +1,41 @@
+import cv2
+ImageCaptureObject = cv2.ImageCapture(0)
+result = True
+while(result):
+ret,frame = ImageCaptureObject.read()
+#To save the capture image
+cv2.imwrite("img.jpg",frame)
+result = False
+ImageCaptureObject.release()
+cv2.destroyAllWindows()
+from skimage import data
+from skimage.filters import gaussian
+from skimage.segmentation import active_contour
+img =cv2.imread("img.jpg")
+s = np.linspace(0, 2*np.pi, 400)
+r = 250 + 100*np.sin(s)
+c = 350 + 100*np.cos(s)
+init = np.array([r, c]).T
+snake = active_contour(gaussian(img, 3),
+init, alpha=0.015, beta=10, gamma=0.001)
+fig, ax = plt.subplots(figsize=(7, 7))
+ax.imshow(img, cmap=plt.cm.gray)
+ax.plot(init[:, 1], init[:, 0], '--r', lw=3)
+ax.plot(snake[:, 1], snake[:, 0], '-b', lw=3)
+ax.set_xticks([]), ax.set_yticks([])
+ax.axis([0, img.shape[1], img.shape[0], 0])
+plt.show()
+import os 
+import tensorflow as tf 
+from tensorflow.keras.preprocessing.image 
+import ImageDataGenerator 
+from tensorflow.keras.layers import Dense, Input, Dropout,Flatten, 
+Conv2D 
+from tensorflow.keras.layers import BatchNormalization, Activation, 
+MaxPooling2D 
+from tensorflow.keras.models import Model, Sequential 
+from tensorflow.keras.optimizers import Adam 
+from tensorflow.keras.callbacks import ModelCheckpoint, 
+ReduceLROnPlateau 
+from tensorflow.keras.utils import plot_model 
+from IPython.display import SVG, Image
